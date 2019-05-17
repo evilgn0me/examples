@@ -1,8 +1,10 @@
-This is an example playbook
+PostgreSQL Cluster example playbook
 ======
 
 This example playbook will install PostgreSQL 10 cluster within docker lab environment.
+
 **This is not meant for Production. Testing ONLY**
+
 Cluster scheme:
   - Master
     - Slave1 = Physical replica. All databases and stuff.
