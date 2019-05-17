@@ -1,0 +1,39 @@
+version: '2'
+services:
+  pgmaster:
+    build: pg_test
+    privileged: true
+    cap_add:
+    - SYS_ADMIN
+    ports:
+      - "50001:22"
+    networks:
+      pgtest:
+        ipv4_address: 172.14.88.11
+  pgslave:
+    build: pg_test
+    privileged: true
+    cap_add:
+    - SYS_ADMIN
+    ports:
+      - "50002:22"
+    networks:
+      pgtest:
+        ipv4_address: 172.14.88.12
+  pgslave2:
+    build: pg_test
+    privileged: true
+    cap_add:
+    - SYS_ADMIN
+    ports:
+      - "50003:22"
+    networks:
+      pgtest:
+        ipv4_address: 172.14.88.13
+networks:
+  pgtest:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.14.88.0/24
+          gateway: 172.14.88.1

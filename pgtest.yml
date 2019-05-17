@@ -1,0 +1,75 @@
+---
+- hosts: all
+  user: root
+  roles:
+    - { role: postgresql-role, tags: 'pgsql' }
+
+# Hardcoded example for logic replication. This is NOGO for production env. Just for test purposes.
+# Normally for database creation or replica creation I would use some role.
+# errors ignored here for sake of debug.
+- hosts: pgmaster
+  user: root
+  become: yes
+  become_method: su
+  become_user: 'postgres'
+  tasks:
+    - name: create postgresql database
+      postgresql_db:
+        name: test
+
+    - name: create postgresql user for logical replication purposes
+      postgresql_user:
+        db: test
+        name: replicant
+        password: md56c74215ddceafce2eeb20fccc05e913e
+        priv: ALL
+        role_attr_flags: LOGIN,SUPERUSER
+
+    - name: restore postgresql database dump
+      postgresql_db:
+        name: test
+        state: restore
+        target: /tmp/test.sql
+      ignore_errors: yes
+
+    - name: create publication for test purposes
+      postgresql_query:
+        db: test
+        query: 'create publication testpub'
+      ignore_errors: yes
+
+    - name: add tables to publication
+      postgresql_query:
+        db: test
+        query: 'alter publication testpub add table {{ item }}'
+      with_items:
+        - a
+        - b
+      ignore_errors: yes
+
+- hosts: pgslave2
+  user: root
+  become: yes
+  become_method: su
+  become_user: 'postgres'
+  tasks:
+    - name: create postgresql database
+      postgresql_db:
+        name: test
+
+    - name: restore postgresql database dump
+      postgresql_db:
+        name: test
+        state: restore
+        target: /tmp/test.sql
+      ignore_errors: yes
+
+    - name: drop unwanted table from database
+      postgresql_query:
+        db: test
+        query: 'drop table c'
+      ignore_errors: yes
+
+    - name: create subscribtion
+      shell: psql test -c "CREATE SUBSCRIPTION testsub CONNECTION 'host=172.14.88.11 port=5432 password=test user=replicant dbname=test' PUBLICATION testpub"
+      ignore_errors: yes
