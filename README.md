@@ -2,6 +2,7 @@ This is an example playbook
 ======
 
 This example playbook will install PostgreSQL 10 cluster within docker lab environment.
+**This is not meant for Production. Testing ONLY**
 Cluster scheme:
   - Master
     - Slave1 = Physical replica. All databases and stuff.
@@ -11,6 +12,13 @@ Dependencies
 =====
 You will need Ansible 2.8.0.
 This playbook also uses my [postgresql role](https://github.com/EvilGn0me/postgresql-role).
+Role is written for average server with Systemd. So docker will have some stuff like:
+~~~~    
+  privileged: true
+  cap_add:
+  - SYS_ADMIN
+~~~~
+This is stuff you need to Systemd to work in docker container.
 
 To use this playbook you also need this in your ansible.cfg. Because all variables stored in dictionaries.
 And by default dictionaries will be replaced.
