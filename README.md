@@ -43,7 +43,7 @@ docker-compose build
 ~~~~
 and launch them
 ~~~~
-docker-compose up&
+docker-compose up -d
 ~~~~
 Lab env working within 172.14.88.0/24 network. I code mostly on MacBook and docker for mac doesn't have access to containers.
 So ports for SSH must be exposed.
