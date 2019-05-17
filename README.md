@@ -12,6 +12,12 @@ Dependencies
 You will need Ansible 2.8.0.
 This playbook also uses my [postgresql role](https://github.com/EvilGn0me/postgresql-role).
 
+To use this playbook you also need this in your ansible.cfg. Because all variables stored in dictionaries.
+And by default dictionaries will be replaced.
+~~~~
+hash_behaviour = merge
+~~~~
+
 To install role use galaxy:
 ~~~~
 ansible-galaxy install -r requirements.yml
@@ -31,9 +37,9 @@ docker-compose up&
 ~~~~
 Lab env working within 172.14.88.0/24 network. I code mostly on MacBook and docker for mac doesn't have access to containers.
 So ports for SSH must be exposed.
-50001 - Master
-50002 - Physical Slave
-50003 - Logical Slave
+- 50001 - Master
+- 50002 - Physical Slave
+- 50003 - Logical Slave
 
 Ansible Stuff
 =====
