@@ -4,6 +4,7 @@ Zabbix-server example playbook
 This example playbook will install Zabbix-server within docker lab environment.
 
 **This is not meant for Production. Testing ONLY**
+You can use playbook on your own servers, but docker test lab is a TEST lab.
 
 Dependencies
 =====
@@ -47,6 +48,9 @@ So ports for SSH must be exposed.
 
 Zabbix server web ui will be available at http://zbx.localhost
 Make sure that you add this hostname to your hosts file.
+~~~~
+127.0.0.1 zbx.localhost
+~~~~
 
 Ansible Stuff
 =====
@@ -54,7 +58,7 @@ Well after you finished with lab env.
 Its time to apply playbook to containers.
 
 ~~~~
-ansible-playbook -i example pgtest.yml
+ansible-playbook -i example zbxtest.yml
 ~~~~
 
-After playbook applied you should be able to test replication. No errors should appear.
+After playbook applied you should be able to access zabbix webui http://zbx.localhost. No errors should appear.
