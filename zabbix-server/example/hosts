@@ -1,0 +1,19 @@
+zabbix:
+  hosts:
+    zbx-server:
+      ansible_host: 127.0.0.1
+      ansible_port: 50011
+  vars:
+    php_conf:
+      packages:
+        - php7.1-mysql
+    zabbix_server_conf:
+      mysql:
+        user: 'zabbix'
+        password: 'testpassword'
+        database: 'zabbix'
+      nginx:
+        hostname: 'zbx.localhost'
+        root_path: '/usr/share/zabbix'
+    mariadb_conf:
+      root_password: 'testpassword'

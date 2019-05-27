@@ -1,0 +1,20 @@
+version: '2'
+services:
+  zbx_server:
+    build: zbx_test
+    privileged: true
+    cap_add:
+    - SYS_ADMIN
+    ports:
+      - "50011:22"
+      - "80:80"
+    networks:
+      zbx_test:
+        ipv4_address: 172.14.89.11
+networks:
+  zbx_test:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.14.89.0/24
+          gateway: 172.14.89.1

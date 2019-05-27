@@ -1,0 +1,9 @@
+---
+- hosts: all
+  user: root
+  roles:
+    - nginx-role
+    - php-role
+    - mariadb-role
+    - zabbix-agent-role
+    - zabbix-server-role
