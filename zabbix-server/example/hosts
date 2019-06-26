@@ -6,7 +6,7 @@ zabbix:
   vars:
     php_conf:
       packages:
-        - php7.1-mysql
+        - php-mysql
     zabbix_server_conf:
       mysql:
         user: 'zabbix'

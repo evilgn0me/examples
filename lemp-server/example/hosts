@@ -1,0 +1,19 @@
+lemp:
+  hosts:
+    lemp-server:
+      ansible_host: 127.0.0.1
+      ansible_port: 50031
+  vars:
+    php_conf:
+      packages:
+        - php-mysql
+    nginx_conf:
+      sites:
+        localhost:
+          hostname: 'localhost'
+          ssl: False
+          stub: True
+          proxyhost: '127.0.0.1:8081'
+    mariadb_conf:
+      root_password: 'testpassword'
+      networking: True

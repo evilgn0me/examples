@@ -1,0 +1,20 @@
+version: '2'
+services:
+  lemp_server:
+    build: lemp-ubuntu
+    privileged: true
+    cap_add:
+    - SYS_ADMIN
+    ports:
+      - '50031:22'
+      - '80:80'
+    networks:
+      lemp_test:
+        ipv4_address: 172.14.90.11
+networks:
+  lemp_test:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.14.90.0/24
+          gateway: 172.14.90.1

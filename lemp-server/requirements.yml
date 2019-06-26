@@ -1,0 +1,3 @@
+- src: git+git@github.com:EvilGn0me/nginx-role.git
+- src: git+git@github.com:EvilGn0me/php-role.git
+- src: git+git@github.com:EvilGn0me/mariadb-role.git
