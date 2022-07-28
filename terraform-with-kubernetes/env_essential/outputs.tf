@@ -1,5 +1,5 @@
 output "kubedeployer_arn" {
-  value = aws_iam_user.kubedeployer.arn
+  value       = aws_iam_user.kubedeployer.arn
   description = "arn for kubedeployer user"
 }
 

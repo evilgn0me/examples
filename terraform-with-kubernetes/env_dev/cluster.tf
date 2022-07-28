@@ -16,12 +16,12 @@ provider "kubernetes" {
 }
 
 module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
-  version         = "17.24.0"
-  cluster_version = var.cluster_version
-  cluster_name    = "${upper(var.env_name)}-${upper(var.project_name)}-Cluster"
-  vpc_id          = data.terraform_remote_state.essentials.outputs.vpc_id
-  subnets         = data.terraform_remote_state.essentials.outputs.vpc_private_subnet_ids
+  source           = "terraform-aws-modules/eks/aws"
+  version          = "17.24.0"
+  cluster_version  = var.cluster_version
+  cluster_name     = "${upper(var.env_name)}-${upper(var.project_name)}-Cluster"
+  vpc_id           = data.terraform_remote_state.essentials.outputs.vpc_id
+  subnets          = data.terraform_remote_state.essentials.outputs.vpc_private_subnet_ids
   write_kubeconfig = false
   node_groups = {
     default = {

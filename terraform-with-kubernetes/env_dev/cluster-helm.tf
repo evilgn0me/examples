@@ -45,8 +45,8 @@ resource "helm_release" "cert-manager" {
 }
 
 resource "helm_release" "pong-service" {
-  name       = "main"
-  chart      = "./resources/pong-service"
+  name  = "main"
+  chart = "./resources/pong-service"
 
   set {
     name  = "image.repository"

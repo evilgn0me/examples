@@ -6,19 +6,19 @@ resource "aws_iam_role_policy_attachment" "ecr_access" {
 resource "aws_iam_policy" "ecr_access" {
   name_prefix = "eks-worker-autoscaling-${module.eks.cluster_id}"
   description = "EKS worker node autoscaling policy for cluster ${module.eks.cluster_id}"
-  policy      = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:BatchGetImage",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:GetAuthorizationToken"
-            ],
-            "Resource": "*"
-        }
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:BatchGetImage",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:GetAuthorizationToken"
+        ],
+        "Resource" : "*"
+      }
     ]
   })
 }

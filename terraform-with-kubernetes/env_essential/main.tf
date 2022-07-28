@@ -3,9 +3,9 @@ module "network" {
   vpc_cidr            = "10.1.0.0/16"
   subnet_cidr_public  = ["10.1.0.0/24", "10.1.1.0/24", "10.1.2.0/24"]
   subnet_cidr_private = ["10.1.10.0/24", "10.1.11.0/24", "10.1.12.0/24"]
-  project_name        = "${var.project_name}"
-  environment_name    = "${var.env_name}"
-  availability_zone   = "${var.aws_main_region}"
+  project_name        = var.project_name
+  environment_name    = var.env_name
+  availability_zone   = var.aws_main_region
   zone_letter         = ["a", "b", "c"]
 }
 
@@ -19,31 +19,31 @@ resource "aws_iam_policy" "kubernetes_read_access_policy" {
   description = "Kubernetes readonly policy"
 
   policy = jsonencode({
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Sid": "VisualEditor0",
-              "Effect": "Allow",
-              "Action": [
-                  "eks:ListNodegroups",
-                  "eks:DescribeFargateProfile",
-                  "eks:ListTagsForResource",
-                  "eks:ListAddons",
-                  "eks:DescribeAddon",
-                  "eks:ListFargateProfiles",
-                  "eks:DescribeNodegroup",
-                  "eks:DescribeIdentityProviderConfig",
-                  "eks:ListUpdates",
-                  "eks:DescribeUpdate",
-                  "eks:AccessKubernetesApi",
-                  "eks:DescribeCluster",
-                  "eks:ListClusters",
-                  "eks:DescribeAddonVersions",
-                  "eks:ListIdentityProviderConfigs"
-              ],
-              "Resource": "*"
-          }
-      ]
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "VisualEditor0",
+        "Effect" : "Allow",
+        "Action" : [
+          "eks:ListNodegroups",
+          "eks:DescribeFargateProfile",
+          "eks:ListTagsForResource",
+          "eks:ListAddons",
+          "eks:DescribeAddon",
+          "eks:ListFargateProfiles",
+          "eks:DescribeNodegroup",
+          "eks:DescribeIdentityProviderConfig",
+          "eks:ListUpdates",
+          "eks:DescribeUpdate",
+          "eks:AccessKubernetesApi",
+          "eks:DescribeCluster",
+          "eks:ListClusters",
+          "eks:DescribeAddonVersions",
+          "eks:ListIdentityProviderConfigs"
+        ],
+        "Resource" : "*"
+      }
+    ]
   })
 }
 

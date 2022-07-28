@@ -9,12 +9,12 @@ terraform {
 }
 
 provider "aws" {
-  region                  = var.aws_main_region
+  region = var.aws_main_region
 }
 
 terraform {
   backend "remote" {
-    hostname = "app.terraform.io"
+    hostname     = "app.terraform.io"
     organization = "evilgn0me-test-org"
 
     workspaces {
